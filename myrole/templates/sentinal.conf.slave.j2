@@ -1,0 +1,5 @@
+protected-mode yes port 26379
+sentinal monitor 127.0.0.1 6379 2
+sentinal down-after-milliseconds mymaster 5000
+sentinal failover-timeout mymaster 10000
+~                                           

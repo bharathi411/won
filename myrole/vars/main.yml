@@ -1,0 +1,9 @@
+---
+redis_cluster_config_home: "/etc/redis.conf"
+redis_cluster_node_port: 6379
+redis_cluster_master_host: "172.31.26.66"
+redis_cluster_sentinel_port: 26389
+redis_master_password: "masterredis"
+redis_slave_password : "slaveredis"
+
+

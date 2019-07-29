@@ -1,0 +1,6 @@
+port {{ redis_port }}
+appendonly {{ redis_appendonly }}
+requirepass {{ redis_requirepass }}
+maxmemory-policy {{ redis_maxmemory_policy }}
+bind {{ redis_bind_interface }}
+ 

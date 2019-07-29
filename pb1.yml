@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become: true
+  roles: 
+     - myrole
+             
+#- hosts: redis-slave
+#  become: true
+#  vars:
+#    - redis-slaveof: 127.0.0.1 6379
+#  roles:
+#    - myrole
+

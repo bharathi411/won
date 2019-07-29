@@ -1,0 +1,61 @@
+---
+- name: Install epel-release
+  yum:
+     name: epel-release
+     state: present
+     update_cache: yes
+
+- name: Install yum-utils
+  yum:
+     name: yum-utils
+     state: present
+
+- name: Install Redis
+  yum:
+     name: http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+     state: present
+
+- name: config-manager
+  command: yum-config-manager --enable remi
+
+- name: yum-clean-metadata
+  command: yum clean metadata
+  args:
+    warn: no
+- name: Enable service redis
+  service:
+    name: redis
+    enabled: yes
+
+- name: Start service redis
+  service:
+    name: redis
+    state: started
+- name: "Copy redis-cluster-master.conf to redis.conf"
+  template:
+    src: ../templates/redis-cluster-master.conf.j2
+    dest: /etc/redis.conf
+  notify: restart_redis
+- name: "Copy redis-cluster-slave.conf to redis.conf"
+  template: 
+    src: ../templates/redis-cluster-slave.conf.j2
+    dest: /etc/redis.conf
+  notify: restart_redis
+- name: Install Redis-sentinal
+  yum:
+   name: redis-devel
+   state: present
+  notify: restart sentinal
+#- name: "Copy redis-sentinal-master.conf to redis.conf"
+#  template:
+#    src: ../templates/sentinal.conf.master.j2
+#    dest: /etc/redis-sentinel.conf
+#  notify: restart_redis
+#- name: "Copy redis-cluster-slave.conf to redis.conf"
+#  template:
+#    src: ../templates/sentinal.conf.slave.j2
+#    dest: /etc/redis-setinel.conf
+#  notify: restart_redis
+
+
+...

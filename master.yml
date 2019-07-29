@@ -1,0 +1,15 @@
+- name: redis on master
+  hosts: redis-master
+  tasks:
+   - name: "Copy redis-cluster-master.conf to {{ redis_cluster_config_home }}"
+     copy:
+      src: myrole/templates/redis-cluster-master.conf.j2
+      dest: /etc/redis.conf
+#   - name: "Copy redis-sentinal-master.conf to redis.conf"
+#     template:
+#      src: myrole/templates/sentinal.conf.master.j2
+#      dest: /etc/redis-sentinel.conf
+#   - name: service restart
+#     service:
+#      name: redis
+#      state: restarted
